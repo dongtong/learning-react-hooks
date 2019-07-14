@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { LoginForm } from './LoginForm';
 
-function App() {
+const getComplexValue = () => {
+  // ...
+  return 10;
+}
+const App = () => {
+  // the first is state, the second is function to update state
+  // const [count, setCount] = useState(10);
+  // useState accepted function only execute one time
+  // useState(() => getComplexValue())
+  const [{count, count2} , setCount] = useState({count: 10, count2: 20});
+  const [{age}, setAge] = useState({ name:'foobar', age: 34 });
+  // setCount(currCount => currCount + 1);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>{age}</div>
+      <div>Count: {count}</div>
+      <div>Count2: {count2}</div>
+      <button
+        onClick={() => {
+            setCount(currState => ({
+              ...currState, // keep other state same
+              count: currState.count + 1
+            }));
+            setAge(currState => ({
+              ...currState,
+              age: currState.age + 1,
+            }));
+          }
+        }
+      > + </button>
+
+      <LoginForm />
     </div>
   );
 }
